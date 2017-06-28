@@ -1,0 +1,116 @@
+
+@textColor: #333;
+@mainColor: #1AAD19;
+@sepSpace: #F0F1F5;
+@sepLine: #DDE0EA;
+@hover: #eee;
+@input-height : 72rpx;
+
+page {
+  height: 100%;
+  width: 100%;
+  background-color: @sepSpace;
+}
+
+view {
+  display: flex;
+  flex-direction: column;
+}
+
+text {
+  display: flex;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.just_center {
+  justify-content: center;
+}
+
+.align_center {
+  align-items: center;
+}
+
+.container {
+  background-color: white;
+  height: 100%;
+}
+// 公共
+.scroll_view {
+  height: 100%;
+}
+.header-avatar {
+  width: 96rpx;
+  height: 96rpx;
+  // margin: 20rpx;
+  border-radius: 50%;
+}
+.user-info{
+  flex-direction:row;
+  align-items: center;
+  justify-content:space-between;
+}
+.user-header{
+  align-items:center;
+}
+.my-btn-area{
+  justify-content: center;
+}
+.my-btn{
+  width: 100%;
+  height:96rpx;
+  background-color:#e1a34F;
+  color:white;
+  font-size:28rpx;
+  justify-content:center;
+  align-items:center;
+  border-radius: 10rpx;
+}
+
+// list组件
+.cell-list{
+    height: 88rpx;
+    padding: 0 20rpx;
+    border-bottom: 1rpx solid @sepSpace;
+    color: #333;
+    font-size: 28rpx;
+    justify-content: space-between;
+    background-color: #fff;
+}
+.cell_box {
+  height: 88rpx;
+  padding: 0 20rpx;
+  border-bottom: 1rpx solid @sepSpace;
+  color: #333;
+  font-size: 28rpx;
+  justify-content: space-between;
+  background-color: #fff;
+}
+.cell_icon {
+  width: 16rpx;
+  height: 28rpx;
+}
+
+button{
+  width: 100%;
+}
+input{
+  width: 100%;
+  // margin: auto;
+  border: 1px solid #000;
+  height: @input-height;
+  line-height: @input-height;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+textarea{
+  width: 100%;
+  min-height: 420rpx;
+  // margin: auto;
+  border: 1rpx solid #000;
+  line-height: @input-height;
+  padding: 10rpx 20rpx;
+  box-sizing: border-box;
+}

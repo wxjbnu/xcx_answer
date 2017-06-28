@@ -1,0 +1,5 @@
+<view class="grade-grade">
+    <view style="margin-top:50rpx;">
+        <list key="listItems" name="itemList"/>
+    </view>
+</view>

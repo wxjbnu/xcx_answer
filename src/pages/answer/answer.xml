@@ -1,0 +1,86 @@
+<view class="container">
+    <scroll-view
+        style="height:100%"
+        scroll-y="true"
+        class="content_scroll"
+    >
+        <view>
+            <!-- 个人信息 -->
+            <view class="user-info" style="padding:0 5%;margin-top:30rpx;">
+                <view class="flex-row user-header">
+                    <image class="header-avatar" src="{{state.userinfo.avatarUrl}}" background-size="cover"></image>
+                    <text>{{state.userinfo.nickName}}</text>
+                </view>
+                <text></text>
+            </view>
+            <view>
+            <!-- 选择年级、学科、select-info-row bindtap="selectGrade"-->
+                <view class="select-grade row" style="">
+                    <picker
+                        style="width:375rpx;height:90rpx;"
+                        mode="selector"
+                        range="{{props.grade}}"
+                        value="{{state.data.grade}}" 
+                        bindchange="gradeChange">
+
+                        <text style="height:90rpx;line-height:90rpx;text-align:center;justify-content:center;" class="">{{props.grade[state.grade]}}</text>
+                    </picker>
+
+                    <picker
+                        style="width:375rpx;height:90rpx;border-left:1px solid;"
+                        mode="selector"
+                        range="{{props.subject}}"
+                        value="{{state.data.subject}}" 
+                        bindchange="subjectChange">
+
+                        <text style="height:90rpx;line-height:90rpx;text-align:center;justify-content:center;" class="">{{props.subject[state.subject]}}</text>
+                    </picker>
+                </view>
+            </view>
+           <form bindsubmit="formSubmit" bindreset="formReset">
+                <view class="form-row">
+                    <input value="{{state.title}}" bindinput="setTitle" name="input" placeholder="输入标题" />
+                </view>
+                <view class="form-row">
+                    <textarea value="{{state.content}}" bindinput="setCont" class="question-des" auto-height="true" placeholder="自动变高" />
+                </view>
+
+                <!--　图片上传列表　-->
+                <component key="picList" />
+                <!--　音频上传列表　-->
+                <component key="voiceList" />
+
+                <view class="form-row">
+                    <view class="flex-row">
+                        <text bindtap="uploadimg">图片</text>
+                        <!--<text>文字</text>-->
+                        <text
+                            bindtouchstart="startrecordvioce"
+                            bindtouchend="stoprecordvioce"
+                        >语音</text>
+                    </view>
+                </view>
+                <view class="form-row">
+                    <picker bindchange="setTime" mode="date" value="{{state.stoptime}}" start="2015-09-01" end="2017-09-01">
+                        <text class="date-input">{{state.stoptime}}</text>
+                    </picker>
+                </view>
+                <view class="form-row">
+                    <input value="{{state.price}}" bindinput="setPrice" name="input" type="digit" placeholder="悬赏金额" />
+                </view>
+                <view class="my-btn-area" style="margin:20rpx 0;">
+                    <!--<component key="btn"/>-->
+                    <view style="margin:10rpx 35%;">
+                        <button type="primary" size="default"
+                bindtap="answerQuestion" hover-class="none">提问</button>
+                    </view>
+                    <!--<button formType="submit">支付</button>-->
+                </view>
+            </form>
+        </view>
+    </scroll-view>
+<!-- wx.showModal-->
+    <!--<view class="footer" catchtap="_showModal">
+        预定场地
+    </view>-->
+</view>

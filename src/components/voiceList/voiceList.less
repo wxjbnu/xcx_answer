@@ -1,0 +1,57 @@
+// @import 'al-ui';
+@import '../../app.less';
+
+.voice-list {
+  background: @color-page;
+  font-size: @font-size-medium;
+}
+
+.voice-wrap{
+  margin-bottom:10px;
+  padding:0 5%;
+}
+.voice-row{
+  // height: 80rpx;
+  margin-bottom: 10rpx;
+}
+
+
+
+.send-left {
+  position:relative;
+  width:150rpx;
+  height:70rpx;
+  margin-left: 20rpx;
+  background:@mainColor;
+  border-radius:5rpx; /* 圆角 */
+  display: inline-block;
+}
+.send-left:before{
+  width:0rpx;
+  height:0rpx;
+  border: 20rpx transparent solid;
+  border-right-color: @mainColor;
+  position:absolute;
+  top:18rpx;
+  right:100%;
+  content:""
+}
+
+.send-right {
+  position:relative;
+  width:150rpx;
+  height:70rpx;
+  background:@mainColor;
+  border-radius:5rpx; /* 圆角 */
+  display: inline-block;
+}
+.send-right:before{
+  width:0rpx;
+  height:0rpx;
+  border: 20rpx transparent solid;
+  border-left-color: @mainColor;
+  position:absolute;
+  top:18rpx;
+  left:100%;
+  content:""
+}

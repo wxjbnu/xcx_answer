@@ -1,0 +1,6 @@
+<view class="gradeno-gradeno" style="flex-direction: column;">
+    <text style="margin-top:50rpx;">{{state.name}}</text>
+    <view>
+        <list key="listItems" name="itemList"/>
+    </view>
+</view>

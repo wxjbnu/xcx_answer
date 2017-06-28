@@ -1,0 +1,17 @@
+<view class="alert_mask" hidden="{{state.hidden}}">
+    <view class="alert_box">
+        <view class="alert_title">{{props.title}}</view>
+        <view class="alert_content">{{props.content}}</view>
+
+        <view class="alert_btn_box">
+            <view
+                class="alert_btn"
+                catchtap="_onClickCancelBtn"
+            >{{props.cancelText}}</view>
+            <view
+                class="alert_btn alert_btn_confirm_text"
+                catchtap="_onClickConfirmBtn"
+            >{{props.confirmText}}</view>
+        </view>
+    </view>
+</view>

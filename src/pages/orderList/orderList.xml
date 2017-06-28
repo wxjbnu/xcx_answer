@@ -1,0 +1,14 @@
+<view class="orderList-orderList">
+
+    <view class="tab-wrap" bindtap="selTab" style="border:1rpx solid #1AAD19;">
+        <view id="a0" style="{{state.active[0]}}" class="tab-item {{state.active[0]}}">已回答</view>
+        <view id="a1" style="{{state.active[1]}}" class="tab-item {{state.active[1]}}">未回答</view>
+        <view id="a2" style="{{state.active[2]}}" class="tab-item {{state.active[2]}}">已超时</view>
+    </view>
+
+    <scroll-view scroll-y="true"
+        class="scroll_view">
+        
+        <list key="listItems" name="answerItem"/>
+    </scroll-view>
+</view>

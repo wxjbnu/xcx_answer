@@ -1,0 +1,11 @@
+<!--userinfo.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <image class="userinfo-avatar" src="{{state.userInfo.avatarUrl}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{state.userInfo.nickName}}</text>
+  </view>
+
+  <view style="margin-top:50rpx;">
+    <list key="listItems" name="itemList"/>
+  </view>
+</view>

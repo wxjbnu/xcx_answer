@@ -1,0 +1,7 @@
+<view>
+    <view class="countdown-wrap" style="display: flex;flex-direction: row;">
+        <view class="countdown-hour">{{state.hour}}:</view>
+        <view class="countdown-min">{{state.min}}:</view>
+        <view class="countdown-sec">{{state.sec}}</view>
+    </view>
+</view>

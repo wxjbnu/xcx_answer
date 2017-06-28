@@ -1,0 +1,86 @@
+<view>
+    <!--<view wx:if="{{state.tips.length == 0}}" class="header"/></view>-->
+
+    <!--<view wx:if="{{state.tips.length > 0}}" class="tips_box">
+        <view class="tips_content">{{state.tips}}</view>
+    </view>-->
+
+    <view style="background:#fff;height:{{state.searchBarHeight}}rpx">
+    <!-- 选择年级、学科、select-info-row bindtap="selectGrade"-->
+        <view class="select-grade row" style="">
+            <!--<text class="select-grade-tt" style="">科目</text>
+            <text class="select-grade-input" style="">{{state.gradename}}</text>-->
+            <!--<input class="select-grade-input" value="{{state.gradename}}" disabled="true" placeholder="选择年级、学科、"/>-->
+            <picker
+                style="width:250rpx;height:90rpx;"
+                mode="selector"
+                range="{{props.grade}}"
+                value="{{state.data.grade}}" 
+                bindchange="gradeChange">
+
+                <text style="height:90rpx;line-height:90rpx;text-align:center;justify-content:center;" class="date-input">{{props.grade[state.data.grade]}}</text>
+            </picker>
+
+            <!-- 不用 以前年级和小初高分开 -->
+            <!--<picker
+                style="width:250rpx;height:90rpx;border-left:1px solid;"
+                mode="selector"
+                range="{{props.gradeno}}"
+                value="{{state.data.gradeno}}" 
+                bindchange="gradenoChange">
+
+                <text style="height:90rpx;line-height:90rpx;text-align:center;justify-content:center;" class="date-input">{{props.gradeno[state.data.gradeno]}}</text>
+            </picker>-->
+
+            <picker
+                style="width:250rpx;height:90rpx;border-left:1px solid;"
+                mode="selector"
+                range="{{props.subject}}"
+                value="{{state.data.subject}}" 
+                bindchange="subjectChange">
+
+                <text style="height:90rpx;line-height:90rpx;text-align:center;justify-content:center;" class="date-input">{{props.subject[state.data.subject]}}</text>
+            </picker>
+
+            <!-- 时间排序 价格排序 -->
+            <picker
+                style="width:250rpx;height:90rpx;border-left:1px solid;"
+                mode="selector"
+                range="{{props.orderType}}"
+                value="{{state.data.orderType}}" 
+                bindchange="orderTypeChange">
+
+                <text style="height:90rpx;line-height:90rpx;text-align:center;justify-content:center;" class="date-input">{{props.orderType[state.data.orderType]}}</text>
+            </picker>
+        </view>
+        <!-- 确认按钮 -->
+        <view style="margin:20rpx 30%;">
+            <button type="primary" size="default"
+                bindtap="searchQuestion" hover-class="none">搜索</button>
+            <!--<view class="my-btn" style="width:280rpx;" bindtap="answerQuestion">
+                提问
+            </view>-->
+        </view>
+    </view>
+
+    <!-- 问题列表 -->
+    <scroll-view
+        style="height:{{state.pageHeight}}rpx;"
+        scroll-y="true"
+        class="scroll_view"
+        bindscrolltolower="loadMore"
+    >
+        <image bindtap="showBig" 
+            id="http://wxupload-1253759887.cosgz.myqcloud.com/tmp_a1dec336cde06fe0394805d9d6c0ff0aca12e800dfc417c2.jpg"
+            src="http://wxupload-1253759887.cosgz.myqcloud.com/tmp_a1dec336cde06fe0394805d9d6c0ff0aca12e800dfc417c2.jpg">
+         
+        </image>
+        <list key="listItems" name="answerItem"/>
+        <view wx:if="{{state.more}}" style="text-align:center;height:90rpx;line-height:90rpx;color:red;">
+            加载更多...
+        </view>
+        <view wx:if="{{!state.more}}" style="text-align:center;height:90rpx;line-height:90rpx;color:red;">
+            已经到底了
+        </view>
+    </scroll-view>
+</view>

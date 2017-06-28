@@ -1,0 +1,18 @@
+<view>
+    <!-- 问题描述 -->
+    <component key="answerItem" />
+
+    <view style="margin: 20rpx 40rpx;font-size:28rpx;">
+        <text style="margin:80rpx 0;">注意：</text>
+        <text>1、在抢答后，未在规定时间作答，禁抢一天</text>
+        <text>2、有把握才可以抢答，若连续抢答三次差评者禁抢一周</text>
+        <text>3、回答的又好又快者，可能获得好评</text>
+        <text>4、回答需要有解题思路，可以利用文字图片及语音的方式回答</text>
+    </view>
+
+     <!-- 确认按钮 -->
+    <view class="my-btn-area" style="margin:20rpx 30%;">
+        <button type="primary" size="default"
+                bindtap="answerQuestion" hover-class="none">立即抢单</button>
+    </view>
+</view>

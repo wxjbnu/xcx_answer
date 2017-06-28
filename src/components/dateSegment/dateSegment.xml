@@ -1,0 +1,30 @@
+<view>
+    <scroll-view
+        scroll-x="true"
+        class="scroll_box"
+    >
+        <view
+            wx:for="{{state.dateModels}}"
+            wx:for-index="index"
+            wx:key="{{index}}"
+            wx:for-item="date"
+            class="date_item just_center align_center {{index == 0 ? 'date_item_first' : ''}}"
+            catchtap="onClickDate"
+            id="{{index}}"
+        >
+            <View class="date_item_title {{index == state.selectIndex ? 'date_item_select' : ''}}">
+                {{date.title}}
+            </View>
+            <View class="date_item_content {{index == state.selectIndex ? 'date_item_select' : ''}}">
+                {{date.date}}
+            </View>
+        </view>
+    </scroll-view>
+
+    <view class="tips_box row align_center">
+        <image src="/images/icon_booking_can.png" class="tips_icon"/>
+        <text class="tips_text">可预订</text>
+        <image src="/images/icon_booking_cannot.png" class="tips_icon"/>
+        <text class="tips_text">不可预订</text>
+    </view>
+</view>

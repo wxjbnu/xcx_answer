@@ -1,0 +1,34 @@
+<view
+    catchtap="_onClickCell"
+    hover="true"
+    hover-class="cell_hover"
+    id="{{props.answerModel.id}}"
+    class=""
+>
+    <view class="row align_center cell_box">
+        <view wx:if="{{props.answerModel.image_url}}" class="cell_image_wrap">
+            <image class="cell_image" mode="aspectFill" src="{{props.host+props.answerModel.image_url[0].url}}"/>
+        </view>
+
+        <view class="cell_body">
+            <view class="cell-tt">{{props.answerModel.title}}</view>
+            <view class="cell-des">
+                {{props.answerModel.des}}
+            </view>
+        </view>
+
+        <view style="align-items:center;color:#1AAD19;">
+            <text wx:if="{{props.isAnswer}}">¥{{props.answerModel.price}}元</text>
+            <image class="cell_icon" src="../../images/icon_into_gray.png"/>
+        </view>
+    </view>
+
+    <view class="cell_footer">
+        <text>{{state.grade}}{{state.subject}}</text>
+        <view>
+            <block wx:if="{{props.isAnswer}}">
+                <component key="countdown"/>
+            </block>
+        </view>
+    </view>
+</view>

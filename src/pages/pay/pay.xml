@@ -1,0 +1,19 @@
+<view class="pay-pay" style="padding:0 5%;">
+    <view class="group" style="margin-top:100rpx;">
+        <icon style="text-align:center;" type="success" size="{{state.iconSize}}"/>
+    </view>
+    <view class="group" style="margin-top:20rpx;">
+        <text class="just_center">我的零钱</text>
+    </view>
+    <view class="group" style="margin-top:20rpx;">
+        <text style="justify-content:center;font-size:100rpx;">¥55</text>
+    </view>
+    <view class="group" style="margin-top:100rpx;">
+        <button type="primary" size="default"
+         bindtap="pay" hover-class="none">充值</button>
+    </view>
+    <view class="group" style="margin-top:20rpx;">
+        <button type="primary" size="default" plain="false"
+        disabled="false" bindtap="pay" hover-class="none">提现</button>
+    </view>
+</view>

@@ -1,0 +1,12 @@
+<view
+    catchtap="_onClickCell"
+    hover="true"
+    hover-class="cell_hover"
+    class="cell-list"
+    id="{{props.listObj.id}}"
+>
+    <view class="row align_center cell_box">
+        <text>{{props.listObj.title}}</text>
+        <image class="cell_icon" src="../../images/icon_into_gray.png"/>
+    </view>
+</view>

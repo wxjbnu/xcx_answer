@@ -1,0 +1,60 @@
+<view class="">
+
+    <!-- 问题信息 -->
+    <view style="background:#fff;padding-top:20rpx;">
+        <!-- 个人信息 -->
+        <view class="user-info" style="padding:0 5%;">
+            <view class="flex-row user-header">
+                <image class="header-avatar" src="{{state.question.userinfo.poster}}" background-size="cover"></image>
+                <text>微信昵称</text>
+            </view>
+            <text>高中数学</text>
+        </view>
+        
+        <!-- 问题描述 -->
+        <view>
+            <view class="answer-des-tt">{{state.question.title}}</view>
+            <!-- 题目描述 -->
+            <view class="answer-des-detail">{{state.question.des}}</view>
+
+            <!--　图片上传列表　-->
+            <component key="picList" />
+            <!--　音频上传列表　-->
+            <component key="voiceList" />
+        </view>
+
+    </view>
+
+    <!-- 答题信息 -->
+    <view style="background:#fff;margin-top:30rpx;padding:20rpx 0;">
+        <!-- 回答 -->
+        <view class="form-row">
+            <textarea bindinput="setCont" class="question-des" auto-height="true" placeholder="自动变高" />
+        </view>
+        <!--　图片上传列表　-->
+        <component key="answerPicList" name="picList" />
+        <!--　音频上传列表　-->
+        <component key="answerVoiceList" name="voiceList"/>
+        <view class="form-row">
+            <view class="flex-row">
+                <text bindtap="uploadimg">图片</text>
+                <!--<text>文字</text>-->
+                <text
+                    bindtouchstart="startrecordvioce"
+                    bindtouchend="stoprecordvioce"
+                >语音</text>
+            </view>
+        </view>
+        <view class="my-btn-area" style="margin:20rpx;border-top:1rpx solid #333;">
+            <view style="margin:10rpx;display:flex;flex-direction: row;justify-content: center;">
+                <button type="primary" size="default" style="flex:0 0 33%"
+                    bindtap="answerQuestion" hover-class="none">提交</button>
+                    <!--<button type="primary" size="default" style="flex:0 0 33%"
+                    bindtap="answerQuestion" hover-class="none">提交</button>
+                    <button type="primary" size="default" style="flex:0 0 33%"
+                    bindtap="answerQuestion" hover-class="none">提交</button>-->
+            </view>
+        </view>
+
+    </view>
+</view>

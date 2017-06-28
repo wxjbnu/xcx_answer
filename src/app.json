@@ -1,0 +1,61 @@
+{
+  "pages": [
+    
+    "pages/main/main",
+    "pages/pay/pay",
+    
+    "pages/answerDetail/answerDetail",
+    "pages/answerOrder/answerOrder",
+    "pages/orderList/orderList",
+    
+    "pages/userinfo/userinfo",
+    "pages/questionList/questionList",
+    
+
+    "pages/answer/answer",
+    "pages/grade/grade",
+    "pages/gradeno/gradeno",
+    "pages/subject/subject"
+    
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#41A3FF",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true,
+    "backgroundColor": "#F0F1F5"
+  },
+  "tabBar": {
+    "color": "#ffffff",
+    "selectedColor": "#222222",
+    "backgroundColor": "#1AAD19",
+    "borderStyle" : "white",
+    "position" : "bottom",
+    "list": [{
+      "selectedIconPath": "images/close.jpg",
+      "iconPath": "images/close.jpg",
+      "pagePath": "pages/main/main",
+      "text": "首页"
+    }, {
+      "selectedIconPath": "images/close.jpg",
+      "iconPath": "images/close.jpg",
+      "pagePath": "pages/answer/answer",
+      "text": "提问"
+    }, {
+      "selectedIconPath": "images/close.jpg",
+      "iconPath": "images/close.jpg",
+      "pagePath": "pages/questionList/questionList",
+      "text": "已答广场"
+    }, {
+      "selectedIconPath": "images/close.jpg",
+      "iconPath": "images/close.jpg",
+      "pagePath": "pages/userinfo/userinfo",
+      "text": "个人中心"
+    }]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  }
+}

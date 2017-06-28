@@ -1,0 +1,35 @@
+// @import 'al-ui';
+@import "../../app";
+@import "../../components/answerItem/answerItem";
+
+.orderList-orderList {
+  background: @color-page;
+  font-size: @font-size-medium;
+}
+
+.tab-wrap{
+  background: #fff;
+  height: 90rpx;
+  border: 1rpx solid @mainColor;
+  flex-direction: row;
+}
+.tab-item{
+  flex: 0 0 33.33%;
+  height: 90rpx;
+  box-sizing: border-box;
+  border-left: 1px solid @mainColor;
+  justify-content: center;
+  align-items: center;
+}
+.tab-item.active{
+    background: @mainColor;
+    color: #fff;
+  }
+
+
+.tab-item:first-child{
+  border-left:0 none;
+}
+// .tab-item.active{
+  
+// }

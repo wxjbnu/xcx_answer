@@ -1,0 +1,19 @@
+<view class="voice-wrap">
+    <view class="voice-row"
+        wx:for="{{props.voiceArr}}"
+        wx:for-index="index"
+        wx:key="{{index}}"
+        wx:for-item="src"
+    >
+        <!--<view class="send">
+            <view class="arrow-right"></view>
+        </view>-->
+        <view style="flex-direction:row;align-items:center;"
+            id="{{src}}" 
+            bindtap="playVoice">
+            <!--<view class="send-arrow-left"></view>-->
+            <view class="send-left"></view>
+            <view style="padding-left:10rpx;">12{{state.voiceTime}}″</view>
+        </view>
+    </view>
+</view>

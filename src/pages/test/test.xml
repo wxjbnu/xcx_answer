@@ -1,0 +1,19 @@
+<view class="test-test">
+    <view
+        wx:for="{{state.list}}"
+        wx:for-index="index"
+        wx:key="{{index}}"
+        wx:for-item="model"
+    >
+        <view class="cell">
+            <image src="./test.png" class="image"/>
+
+            <view class="title_content_box">
+                <text class="cell_title">{{model.title}}</text>
+                <text class="cell_content">{{model.content}}</text>
+            </view>
+
+            <view>250m</view>
+        </view>
+    </view>
+</view>

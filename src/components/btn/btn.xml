@@ -1,0 +1,5 @@
+<view class="">
+    <view class="btn" catchtap="_onTap">
+        <text>{{props.title}}</text>
+    </view>
+</view>
