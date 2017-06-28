@@ -62,10 +62,11 @@ export function login(){
                             try {
                                 wx.setStorageSync('userinfo', userinfo)
                                 wx.request({
-                                    url: 'http://119.29.253.88/zerg/public/api/v1/token/user',
+                                    url: `${wx.host}zerg/public/api/v1/token/user`,
                                     method:'POST',
                                     data: data,
                                     complete: function(r1){
+                                        console.log('token', r1)
                                         wx.setStorageSync('token',r1.data)
                                         resolve({token:r1,userInfo:r1.userInfo})
                                     }

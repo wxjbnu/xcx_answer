@@ -272,7 +272,7 @@ export default class answer extends Component {
             grade:this.state.grade,
             subject:this.state.subject,
         }
-        const url = 'http://119.29.253.88/zerg/public/api/v1/createtopic/1'
+        const url = `${wx.host}zerg/public/api/v1/createtopic/1`;
         const data = {
             price:this.state.price,
             stoptime:this.state.stoptime,

@@ -64,7 +64,7 @@ class Main extends Component {
     // 暂时不用
     // this.props.gradename = ['小学','初中','高中']
     // this.props.gradeno = ['一年级','二年级','三年级','四年级','五年级','六年级']
-
+    console.log(wx.host)
     this.props.grade = config.gradeArr
     this.props.subject = config.subjectArr
     this.props.orderType = config.orderType
@@ -134,7 +134,7 @@ class Main extends Component {
 
   _getList = ()=>{
     console.log(this.state.data.orderType)
-    const url = `http://119.29.253.88/zerg/public/api/v1/topic/${this.state.pageIndex}/${this.state.data.orderType}/${this.state.data.grade}/${this.state.data.subject}`
+    const url = `${wx.host}zerg/public/api/v1/topic/${this.state.pageIndex}/${this.state.data.orderType}/${this.state.data.grade}/${this.state.data.subject}`
     const that = this
     let arr = []
     console.log(url)

@@ -4,10 +4,14 @@ import wx from 'labrador';
 // console.log(crypto)
 import * as config from './config'
 export default class {
-  
+    globalData = {
+        userInfo: null
+    };
+
     async onLaunch() {
         wx.config = config;
-        wx.imgurl = ' https://wxupload-1253759887.cosgz.myqcloud.com/'
+        wx.imgurl = 'https://wxupload-1253759887.cosgz.myqcloud.com/'
+        wx.host = 'https://119.29.253.88/'
         try {
             const deviceInfo = await wx.getSystemInfo();
             const {windowWidth, windowHeight} = deviceInfo;  // 得到的是 点 为单位 iphone6 => 375

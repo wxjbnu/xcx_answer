@@ -223,7 +223,7 @@ class AnswerDetail extends Component {
     }
 
     answerQuestion = event =>{
-        const url = 'http://119.29.253.88/zerg/public/api/v1/createanswer'
+        const url = `${wx.host}zerg/public/api/v1/createanswer`;
         const data = {
             topic_id:this.state.question.tid,
             title:'11',
