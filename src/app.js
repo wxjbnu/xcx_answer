@@ -11,7 +11,7 @@ export default class {
     async onLaunch() {
         wx.config = config;
         wx.imgurl = 'https://wxupload-1253759887.cosgz.myqcloud.com/'
-        wx.host = 'https://119.29.253.88/'
+        wx.host = 'https://17348576.sudaquick.com/' //https://119.29.253.88/
         try {
             const deviceInfo = await wx.getSystemInfo();
             const {windowWidth, windowHeight} = deviceInfo;  // 得到的是 点 为单位 iphone6 => 375
