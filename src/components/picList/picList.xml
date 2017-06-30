@@ -1,15 +1,16 @@
 <!--<view class="pic-list">-->
     <view class="img-wrap">
         <view class="img-row"
+            wx:if="{{props.srcArr.length>0}}"
             wx:for="{{props.srcArr}}"
             wx:for-index="index"
             wx:key="{{index}}"
             wx:for-item="src"
         >   
-            <image wx:if="{{props.local}}" id="{{src}}" bindtap="preimglocal" 
-                style="width:100%;height:100%;background-color: #eeeeee;" 
+            <image wx:if="{{props.local && src}}" id="{{src}}" bindtap="preimglocal" 
+                style="width:100%;height:100%;background-color: #eeeeee;"
                 mode="aspectFill" src="{{src}}"></image>
-            <image wx:if="{{!props.local}}" id="{{props.host+src.url}}" bindtap="preimg" 
+            <image wx:if="{{!props.local && src.url}}" id="{{props.host+src.url}}" bindtap="preimg" 
                 style="width:100%;height:100%;background-color: #eeeeee;" 
                 mode="aspectFill" src="{{props.host+src.url}}"></image>
         </view>

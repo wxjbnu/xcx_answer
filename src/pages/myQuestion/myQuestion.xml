@@ -1,0 +1,23 @@
+<view>
+    <!--<view wx:if="{{state.tips.length == 0}}" class="header"/></view>-->
+
+    <!--<view wx:if="{{state.tips.length > 0}}" class="tips_box">
+        <view class="tips_content">{{state.tips}}</view>
+    </view>-->
+
+    <!-- 问题列表 -->
+    <scroll-view
+        style="height:{{state.pageHeight}}rpx;"
+        scroll-y="true"
+        class="scroll_view"
+        bindscrolltolower="loadMore"
+    >
+        <list key="listItems" name="answerItem"/>
+        <view wx:if="{{state.more}}" style="text-align:center;height:90rpx;line-height:90rpx;color:red;">
+            加载更多...
+        </view>
+        <view wx:if="{{!state.more}}" style="text-align:center;height:90rpx;line-height:90rpx;color:red;">
+            已经到底了
+        </view>
+    </scroll-view>
+</view>

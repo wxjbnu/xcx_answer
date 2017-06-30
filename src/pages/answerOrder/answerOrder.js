@@ -91,10 +91,40 @@ class Main extends Component {
 
   // onUnload() {
   // }
+
   answerQuestion = event=>{
-    wx.navigateTo({
-          url: `../../pages/answerDetail/answerDetail?answerId=${this.state.questionId}&communityId=${2}&contact=${1}&title=${'hahah'}`
-      });
+    const url = `${wx.host}zerg/public/api/v1/rushtopic`;
+    const data = {
+        topic_id:this.state.question.tid,
+    }
+    const token = wx.getStorageSync('token').token
+    const questionId = this.state.questionId
+    console.log(data)
+    wx.request({
+        url: url, //仅为示例，并非真实的接口地址
+        data: data,
+        method:'POST',
+        header: {
+            'content-type': 'application/json',
+            'token': token,
+        },
+        success: function(res) {
+            console.log('success',res.data)
+        },
+        complete: function(r){
+          console.log('complete',r)
+          if(r.errMsg.indexOf('ok')>-1){
+            wx.navigateTo({
+              url: `../../pages/answerDetail/answerDetail?answerId=${questionId}&title=${'hahah'}`
+            });
+          }else{
+            wx.showToast({
+              title: JSON.stringify(r),
+              duration: 3000
+            });
+          }
+        }
+    })    
   }
 
   gradeChange = event=>{

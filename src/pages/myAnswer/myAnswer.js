@@ -9,7 +9,7 @@ import * as config from '../../config'
 
 // const { any } = PropTypes;
 
-class Main extends Component {
+class myAnswer extends Component {
 
   static propTypes = {
     // gradename: PropTypes.array,
@@ -29,7 +29,7 @@ class Main extends Component {
         pageIndex:1,
         more:true,
         searchBarHeight:'300',
-        pageHeight:wx.HEIGHT-300,
+        pageHeight:wx.HEIGHT,
         questionArr: [],
         data:{
           // gradename: null,
@@ -106,7 +106,7 @@ class Main extends Component {
 
   _getList = ()=>{
     console.log(this.state.data.orderType)
-    const url = `${wx.host}zerg/public/api/v1/answeredtopic/${this.state.pageIndex}/${this.state.data.orderType}/${this.state.data.grade}/${this.state.data.subject}`
+    const url = `${wx.host}zerg/public/api/v1/mytopic/`
     const that = this
     let arr = []
     console.log(url)
@@ -118,7 +118,11 @@ class Main extends Component {
     })
     wx.request({
       url: url, 
-      data: {},
+      data: {
+        type: 1,
+        page: that.state.pageIndex
+      },
+      method: 'POST',
       header: {
           'content-type': 'application/json',
           'token': token
@@ -353,7 +357,7 @@ class Main extends Component {
 
 }
 
-export default Main;
+export default myAnswer;
 
 // export default connect(
 //   (state)=>({})

@@ -7,6 +7,7 @@ import answerDes from '../../components/answerDes/answerDes';
 import picList from '../../components/picList/picList';
 import voiceList from '../../components/voiceList/voiceList';
 import {upload} from '../../utils/upload';
+import * as config from '../../config'
 
 const { any } = PropTypes;
 
@@ -16,7 +17,8 @@ class AnswerDetail extends Component {
   };
 
   static defaultProps = {
-    foo: 'bar'
+    gradeArr: config.gradeArr,
+    subjectArr: config.subjectArr,
   };
 
   constructor(props) {

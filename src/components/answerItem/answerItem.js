@@ -43,7 +43,7 @@ class answerItem extends Component {
     onLoad() {
         this.props.host = wx.imgurl
         
-        console.log(this.props.answerModel.image_url)
+        console.log(this.props.answerModel)
         console.log(this.props.host)
     }
 

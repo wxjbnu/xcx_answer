@@ -18,7 +18,7 @@ class picList extends Component {
   constructor(props) {
     super(props);
     this.state = ({
-      srcArr:['']
+      srcArr:[]
     });
   }
 
@@ -79,7 +79,7 @@ class picList extends Component {
       console.log(url)
       console.log('end ----------------------')
       wx.previewImage({
-        // current: url, // 当前显示图片的http链接
+        current: url, // 当前显示图片的http链接
         urls: urls // 需要预览的图片http链接列表
       })
   }

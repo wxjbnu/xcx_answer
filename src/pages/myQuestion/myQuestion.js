@@ -29,7 +29,7 @@ class Main extends Component {
         pageIndex:1,
         more:true,
         searchBarHeight:'300',
-        pageHeight:wx.HEIGHT-300,
+        pageHeight:wx.HEIGHT,
         questionArr: [],
         data:{
           // gradename: null,
@@ -106,7 +106,8 @@ class Main extends Component {
 
   _getList = ()=>{
     console.log(this.state.data.orderType)
-    const url = `${wx.host}zerg/public/api/v1/answeredtopic/${this.state.pageIndex}/${this.state.data.orderType}/${this.state.data.grade}/${this.state.data.subject}`
+    // 我问和我答的接口，type为0可以获取我问的topic，type为1可以获取我回答的topic
+    const url = `${wx.host}zerg/public/api/v1/mytopic/`
     const that = this
     let arr = []
     console.log(url)
@@ -118,7 +119,11 @@ class Main extends Component {
     })
     wx.request({
       url: url, 
-      data: {},
+      data: {
+        type: 0,
+        page: that.state.pageIndex
+      },
+      method: 'POST',
       header: {
           'content-type': 'application/json',
           'token': token

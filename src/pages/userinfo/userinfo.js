@@ -22,7 +22,7 @@ export default class userinfo extends Component {
             userList:[      //
                 // {title:'消息通知',id:1,url:''},
                 {title:'订单查询',id:14,url:'../orderList/orderList'},
-                {title:'我答',id:12,url:'../answerDetail/answerDetail'},
+                {title:'我问',id:12,url:'../myQuestion/myQuestion'},
                 {title:'支付',id:13,url:'../pay/pay'}
                 
             ]    // [VenueModel]

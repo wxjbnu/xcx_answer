@@ -13,6 +13,8 @@
     
 
     "pages/answer/answer",
+    "pages/myAnswer/myAnswer",
+    "pages/myQuestion/myQuestion",
     "pages/grade/grade",
     "pages/gradeno/gradeno",
     "pages/subject/subject"

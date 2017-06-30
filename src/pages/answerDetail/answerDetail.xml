@@ -8,7 +8,7 @@
                 <image class="header-avatar" src="{{state.question.userinfo.poster}}" background-size="cover"></image>
                 <text>微信昵称</text>
             </view>
-            <text>高中数学</text>
+            <text>{{props.gradeArr[state.question.grade]}}{{props.subjectArr[state.question.subject]}}</text>
         </view>
         
         <!-- 问题描述 -->

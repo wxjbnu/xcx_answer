@@ -1,4 +1,4 @@
-
+import wx from 'labrador';
 /**
  * 最终上传到cos的URL
  * 把以下字段配置成自己的cos相关信息，详情可看API文档 https://www.qcloud.com/document/product/436/6066
@@ -80,7 +80,7 @@ function js_signature(){
 // }  
 
 //填写自己的鉴权服务器地址
-var cosSignatureUrl = 'http://119.29.253.88/zerg/public/api/v1/token/cos' 
+var cosSignatureUrl = `${wx.host}zerg/public/api/v1/token/cos`
 
 /**
  * 上传方法
@@ -95,7 +95,7 @@ export function upload(filePath, fileName) {
             fail: function(e){
                 reject(e)
             },
-            success: function(cosRes) {
+            complete: function(cosRes) {
                 // 签名
                 var signature = cosRes.data.token
                 // var signature = '6ivTxye4UZCJurMIm2KHkURZY8phPTEyNTM3NTk4ODcmaz1BS0lEZ01xOEU4ck1nb1F4SVNqUEZ0TWdvazZHRXpiMHJFMm0mZT0xNDk3OTQ3ODY2JnQ9MTQ5Nzk0NzgwNiZyPTI5ODczNzg4NzImZj0lMkYxMjUzNzU5ODg3JTJGd3h1cGxvYWQlMkYmYj13eHVwbG9hZA=='
@@ -113,7 +113,7 @@ export function upload(filePath, fileName) {
                     formData: {
                         op: 'upload'
                     },
-                    success: function(uploadRes){
+                    complete: function(uploadRes){
                         if(uploadRes.statusCode=200){
                             var data = JSON.parse(uploadRes.data)
                             var imgurl = data.data.source_url

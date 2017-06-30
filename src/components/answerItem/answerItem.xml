@@ -6,7 +6,7 @@
     class=""
 >
     <view class="row align_center cell_box">
-        <view wx:if="{{props.answerModel.image_url}}" class="cell_image_wrap">
+        <view wx:if="{{props.answerModel.image_url[0].url}}" class="cell_image_wrap">
             <image class="cell_image" mode="aspectFill" src="{{props.host+props.answerModel.image_url[0].url}}"/>
         </view>
 
