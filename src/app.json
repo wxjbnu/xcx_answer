@@ -15,6 +15,7 @@
     "pages/answer/answer",
     "pages/myAnswer/myAnswer",
     "pages/myQuestion/myQuestion",
+    "pages/questionInfo/questionInfo",
     "pages/grade/grade",
     "pages/gradeno/gradeno",
     "pages/subject/subject"

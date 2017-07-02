@@ -70,7 +70,7 @@ class Main extends Component {
   onLoad = param => {
       console.log(param)
       this.state.questionId = param.answerId
-      this.state.question = JSON.parse(wx.getStorageSync('question'))
+      this.state.question = (wx.getStorageSync('question'))
       console.log(this.state.question)
       this.setState({
         questionId:param.answerId

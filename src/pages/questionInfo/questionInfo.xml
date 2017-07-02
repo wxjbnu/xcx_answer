@@ -1,0 +1,39 @@
+<view class="container">
+    <view>
+        <!-- 个人信息 -->
+        <view class="user-info" style="padding:0 5%;margin-top:30rpx;">
+            <view class="flex-row user-header">
+                <image class="header-avatar" src="{{state.userinfo.avatarUrl}}" background-size="cover"></image>
+                <text>{{state.userinfo.nickName}}</text>
+            </view>
+            <text>{{props.grade[state.questionInfo.grade]}}{{props.subject[state.questionInfo.subject]}}</text>
+        </view>
+        <!-- 问题详情 -->
+        <view style="padding:0 50rpx;">
+            <view class="">
+                <text class="">题目：{{state.questionInfo.title}}</text>
+            </view>
+            <view class="">
+                <text class="">描述：{{state.questionInfo.des}}</text>
+            </view>
+
+            <!--　图片上传列表　-->
+            <component key="picList" />
+            <!--　音频上传列表　-->
+            <component key="voiceList" />
+
+            <view class="">
+                <text class="">截止日期：{{state.questionInfo.stop_time}}</text>
+            </view>
+            <view class="">
+                <text class="">价格：{{state.questionInfo.price}}</text>
+            </view>
+        </view>
+
+        <!-- 答案 -->
+        <view wx:if="state.questionInfo.answer_user_id!=0">
+
+        </view>
+        <view wx:if="state.questionInfo.answer_user_id==0">还没人作答</view>
+    </view>
+</view>

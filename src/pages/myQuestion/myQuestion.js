@@ -136,6 +136,10 @@ class Main extends Component {
         if(r.errMsg.indexOf('ok')>-1){
           r.data.map((e)=>{
             arr.push({
+              tid:e.id,//topic id ,每个topic 包含问题 和 答案
+              question_id:e.question_id,//问题的id
+              answer_user_id:e.answer_user_id, //回答人id
+              status:e.status,//问题状态 0:待回答 1:被抢答 2:已回答待确认 3:已回答需修改 4:已回答要退单 5:
               title:e.question.speak.title,
               id:e.question.speak.id,
               des:e.question.speak.content,
@@ -219,20 +223,20 @@ class Main extends Component {
   _onClickCell = event=>{
     console.log(event)
     console.log(event.currentTarget.id)
-    const qid = event.currentTarget.id
+    const tid = event.currentTarget.id
     let que = {}
     this.state.questionArr.map((q)=>{
-        if(q.id==qid){
+        if(q.id==tid){
           que = q
         }
     })
-    wx.setStorageSync('question',JSON.stringify(que))
+    wx.setStorageSync('question',(que))
 
     
     console.log(que)
     // return
      wx.navigateTo({
-        url: `/pages/answerOrder/answerOrder?answerId=${qid}&communityId=${2}&contact=${1}&title=${'hahah'}`,
+        url: `/pages/questionInfo/questionInfo?answerId=${tid}&title=${'hahah'}`,
         complete:function(e){
             // console.log(e)
         }
