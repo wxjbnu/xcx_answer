@@ -71,7 +71,6 @@ class Main extends Component {
     this.setState({
       questionArr:[]
     })
-    this._getGrade()
     this._getList()
   }
 
@@ -80,7 +79,6 @@ class Main extends Component {
   }
 
   onUpdate() {
-    this._getGrade()
   }
 
   onShow() {
@@ -95,7 +93,6 @@ class Main extends Component {
     } catch (e) {
       // Do something when catch error
     }
-    this._getGrade()
   }
 
   // onHide() {
@@ -166,67 +163,19 @@ class Main extends Component {
       }
     })
   }
-  _getGrade = ()=>{
-    // 选择年级科目提问
-    const that = this;
-    try {
-      var value = wx.getStorageSync('grade')
-      if (value) {
-          // Do something with return value
-          // let data = {
-          //   grade:value.gName,
-          //   gradeno:value.gnName,
-          //   subject:value.sName,
-          // }
-          // const gradename = (value.gName+value.gnName+value.sName) || ''
-          // that.setState({
-          //     data:data
-          // })
-          // that.setState({
-          //     gradename:gradename
-          // })
-          
-      }
-    } catch (e) {
-      // Do something when catch error
-    }
-  }
 
   // 搜索按钮
   searchQuestion = ()=>{
-    console.log(this.state.data)
-    // this.state.questionArr = []
-    this.setState({
-      questionArr:[]
-    })
-    this._getList()
-    // if(this.state.data.subject==null){
-    //   this._tipShow('请选择科目')
-    //   return
-    // }
-    // if(this.state.data.gradename==null){
-    //   this._tipShow('请选择年级')
-    //   return
-    // }
-    // if(this.state.data.gradeno==null){
-    //   this._tipShow('请选择年级')
-    //   return
-    // }
-    //  wx.navigateTo({
-    //       url: `/pages/answer/answer?answerId=${1}&communityId=${2}&contact=${1}&title=${'hahah'}`,
-    //       complete:function(e){
-    //           // console.log(e)
-    //       }
-    //   });
+
   }
-  // 选择答题
+  // 选择问题
   _onClickCell = event=>{
     console.log(event)
     console.log(event.currentTarget.id)
-    const tid = event.currentTarget.id
+    const qid = event.currentTarget.id
     let que = {}
     this.state.questionArr.map((q)=>{
-        if(q.id==tid){
+        if(q.id==qid){
           que = q
         }
     })
@@ -236,7 +185,7 @@ class Main extends Component {
     console.log(que)
     // return
      wx.navigateTo({
-        url: `/pages/questionInfo/questionInfo?answerId=${tid}&title=${'hahah'}`,
+        url: `/pages/questionInfo/questionInfo?answerId=${qid}&title=${'hahah'}`,
         complete:function(e){
             // console.log(e)
         }

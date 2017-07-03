@@ -29,7 +29,7 @@
     <view style="background:#fff;margin-top:30rpx;padding:20rpx 0;">
         <!-- 回答 -->
         <view class="form-row">
-            <textarea bindinput="setCont" class="question-des" auto-height="true" placeholder="自动变高" />
+            <textarea bindinput="setCont" class="question-des" auto-height="true" placeholder="" />
         </view>
         <!--　图片上传列表　-->
         <component key="answerPicList" name="picList" />

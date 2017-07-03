@@ -29,8 +29,8 @@ export default class questionInfo extends Component {
                 avatarUrl: "http://wx.qlogo.cn/mmopen/vi_32/NxvlX02XFSdftsicKHh6a1GLicNNJha5TCGibia51tGvawFBaSSmaFU4vwLq52tpf72rAg6rreXk9z2ISotV6I1nMg/0"
             },
             tid:null,//topic id 用来获取问题答案
-            questionInfo:{},
-            answers:[],
+            questionInfo:{},//问题内容
+            answers:[],//回答内容
 
             srcArr:[],//图片数组
             voiceArr:[],//录音数组
@@ -142,7 +142,8 @@ export default class questionInfo extends Component {
                 url: url, 
                 data: {},
                 header: {
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
+                    'token': token
                 },
                 complete: function(r){
                     resolve(r)

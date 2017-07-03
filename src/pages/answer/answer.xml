@@ -42,7 +42,7 @@
                     <input value="{{state.title}}" bindinput="setTitle" name="input" placeholder="输入标题" />
                 </view>
                 <view class="form-row">
-                    <textarea value="{{state.content}}" bindinput="setCont" class="question-des" auto-height="true" placeholder="自动变高" />
+                    <textarea value="{{state.content}}" bindinput="setCont" class="question-des" auto-height="true" placeholder="" />
                 </view>
 
                 <!--　图片上传列表　-->

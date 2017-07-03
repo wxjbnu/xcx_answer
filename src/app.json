@@ -9,13 +9,14 @@
     "pages/orderList/orderList",
     
     "pages/userinfo/userinfo",
-    "pages/questionList/questionList",
-    
+    "pages/answerList/answerList",
 
     "pages/answer/answer",
     "pages/myAnswer/myAnswer",
     "pages/myQuestion/myQuestion",
     "pages/questionInfo/questionInfo",
+    "pages/answerInfo/answerInfo",
+
     "pages/grade/grade",
     "pages/gradeno/gradeno",
     "pages/subject/subject"
@@ -48,7 +49,7 @@
     }, {
       "selectedIconPath": "images/close.jpg",
       "iconPath": "images/close.jpg",
-      "pagePath": "pages/questionList/questionList",
+      "pagePath": "pages/answerList/answerList",
       "text": "已答广场"
     }, {
       "selectedIconPath": "images/close.jpg",

@@ -149,18 +149,18 @@ class AnswerDetail extends Component {
                     fileName = fileName[2]
                     // 文件上传cos
                     upload(filePath, fileName).then((e)=>{
-                    console.log('answer',e)
-                    if(e){
-                        that.setState({
-                            srcArr:[...that.state.srcArr, filePath]
-                        })
-                        that.setState({
-                            imgArr:[...that.state.imgArr, e]
-                        })
-                    }
-                },(err)=>{
-                    console.log('err',err)
-                })
+                        console.log('answer',e)
+                        if(e){
+                            that.setState({
+                                srcArr:[...that.state.srcArr, filePath]
+                            })
+                            that.setState({
+                                imgArr:[...that.state.imgArr, e]
+                            })
+                        }
+                    },(err)=>{
+                        console.log('err',err)
+                    })
                 }
                 console.log(e,that.state.srcArr)
             }
@@ -230,7 +230,7 @@ class AnswerDetail extends Component {
             topic_id:this.state.question.tid,
             title:'11',
             content:this.state.content,
-            imageurl:this.state.srcArr.join(),
+            imageurl:this.state.imgArr.join(),
             userid:22,
         }
         const token = wx.getStorageSync('token').token
@@ -248,7 +248,16 @@ class AnswerDetail extends Component {
             },
             complete: function(r){
                 if(r.errMsg.indexOf('ok')>-1){
-                    
+                    wx.showToast({
+                        title: '回答成功',
+                        icon: 'loading',
+                        duration: 500,
+                        complete: function(res){
+                            wx.navigateTo({
+                                url: `../../pages/answerInfo/answerInfo?answerId=${data.topic_id}&title=${'hahah'}`
+                            });
+                        }
+                    });
                 }
                 console.log('complete',r)
             }
