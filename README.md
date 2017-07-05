@@ -9,6 +9,7 @@
 ### 步骤
 - 运行npm install
 - 运行labrador build为编译dist文件, labrador watch为实时刷新
+- labrador build -m -f --ignore-minify-page
 
 
 ### 页面文档

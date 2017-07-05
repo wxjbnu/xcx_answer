@@ -294,8 +294,9 @@ class Main extends Component {
     // console.log(event.detail.value)
     const data = this.copyObject(this.state.data);
     data.grade = Number(event.detail.value)
-    // data.gradeno = ''
-    this.stateChange(data)
+    this.stateChange(data).then(()=>{
+      this.searchQuestion()
+    })
     // this.setSelectStorage({
     //   grade:(data.gradename-1)*data.gradename*3+data.gradeno,
     //   gradename:data.gradename+1,
@@ -313,7 +314,9 @@ class Main extends Component {
     const data = this.copyObject(this.state.data);
     data.subject = Number(event.detail.value)
     
-    this.stateChange(data)
+    this.stateChange(data).then(()=>{
+      this.searchQuestion()
+    })
     // this.setSelectStorage({
     //   gradename:data.gradename+1,
     //   gradeno:data.gradeno+1,
@@ -324,26 +327,21 @@ class Main extends Component {
   orderTypeChange = event=>{
     const data = this.copyObject(this.state.data);
     data.orderType = Number(event.detail.value)
-    this.stateChange(data)
+    this.stateChange(data).then(()=>{
+      this.searchQuestion()
+    })
   }
 
   stateChange = (data)=>{
-    console.log(data)
-    console.log(this.setState)
-    console.log('------------------------')
-    console.log(this.state.data)
-    this.setState({
-      data: data
-    },()=>{
-      this.setState({
+    const that = this
+    return new Promise((resolve, reject)=>{
+      that.setState({
         data: data
       },()=>{
-        console.log('+++++++++++++++++')
-        console.log(this.state.data)
+        resolve()
       })
-      console.log('------------------------')
-      console.log(this.state.data)
     })
+    
     
   }
 

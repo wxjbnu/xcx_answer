@@ -54,13 +54,10 @@
             </picker>
         </view>
         <!-- 确认按钮 -->
-        <view style="margin:20rpx 30%;">
+        <!--<view style="margin:20rpx 30%;">
             <button type="primary" size="default"
                 bindtap="searchQuestion" hover-class="none">搜索</button>
-            <!--<view class="my-btn" style="width:280rpx;" bindtap="answerQuestion">
-                提问
-            </view>-->
-        </view>
+        </view>-->
     </view>
 
     <!-- 问题列表 -->
@@ -70,11 +67,10 @@
         class="scroll_view"
         bindscrolltolower="loadMore"
     >
-        <image bindtap="showBig" 
+        <!--<image bindtap="showBig" 
             id="http://wxupload-1253759887.cosgz.myqcloud.com/tmp_a1dec336cde06fe0394805d9d6c0ff0aca12e800dfc417c2.jpg"
             src="http://wxupload-1253759887.cosgz.myqcloud.com/tmp_a1dec336cde06fe0394805d9d6c0ff0aca12e800dfc417c2.jpg">
-         
-        </image>
+        </image>-->
         <list key="listItems" name="answerItem"/>
         <view wx:if="{{state.more}}" style="text-align:center;height:90rpx;line-height:90rpx;color:red;">
             加载更多...
