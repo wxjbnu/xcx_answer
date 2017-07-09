@@ -23,7 +23,7 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = ({
-        questionId:null,
+        topicId:null,
         question:{
           title:'哈哈',
           id:1,
@@ -69,11 +69,11 @@ class Main extends Component {
 
   onLoad = param => {
       console.log(param)
-      this.state.questionId = param.answerId
+      this.state.topicId = param.topicId
       this.state.question = (wx.getStorageSync('question'))
       console.log(this.state.question)
       this.setState({
-        questionId:param.answerId
+        topicId:param.topicId
       })
   }
 
@@ -98,7 +98,7 @@ class Main extends Component {
         topic_id:this.state.question.tid,
     }
     const token = wx.getStorageSync('token').token
-    const questionId = this.state.questionId
+    const topicId = this.state.topicId
     console.log(data)
     wx.request({
         url: url, //仅为示例，并非真实的接口地址
@@ -115,7 +115,7 @@ class Main extends Component {
           console.log('complete',r)
           if(r.errMsg.indexOf('ok')>-1){
             wx.navigateTo({
-              url: `../../pages/answerDetail/answerDetail?answerId=${questionId}&title=${'hahah'}`
+              url: `../../pages/answerDetail/answerDetail?topicId=${topicId}&title=${'hahah'}`
             });
           }else{
             wx.showToast({

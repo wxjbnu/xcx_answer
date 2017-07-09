@@ -1,5 +1,7 @@
+
+
 import wx, {Component, PropTypes} from 'labrador';
-import {log, POST, showHUDMessage, showHUDLoading, hideHUDLoading} from '../../utils/utils';
+import {log, POST, showHUDMessage, showHUDLoading, hideHUDLoading, login,checkSession} from '../../utils/utils';
 import URL from '../../utils/url-interface';
 import immutable from 'seamless-immutable';
 //import { connect } from 'labrador-redux';
@@ -44,27 +46,27 @@ class Main extends Component {
 
   children() {
     const items = this.state.questionArr || [];
-      return {
-          // 倒计时组件
-          listItems: items.map((item) => {
-              return {
-                  component: answerItem,
-                  key: item.id,
-                  props: {
-                      answerModel: item,
-                      isAnswer:true,
-                      onClickCell: this._onClickCell
-                  }
-              };
-          })
-      };
+    return {
+        // 倒计时组件
+        listItems: items.map((item) => {
+            return {
+                component: answerItem,
+                key: item.id,
+                props: {
+                    answerModel: item,
+                    isAnswer:true,
+                    onClickCell: this._onClickCell
+                }
+            };
+        })
+    };
   }
 
   onLoad() {
     // 暂时不用
     // this.props.gradename = ['小学','初中','高中']
     // this.props.gradeno = ['一年级','二年级','三年级','四年级','五年级','六年级']
-
+    console.log(wx.host)
     this.props.grade = config.gradeArr
     this.props.subject = config.subjectArr
     this.props.orderType = config.orderType
@@ -73,6 +75,12 @@ class Main extends Component {
     })
     this._getGrade()
     this._getList()
+
+    // 检查登录
+    checkSession().then((res)=>{
+      console.log('checkSession main')
+      console.log(res)
+    })
   }
 
   onReady() {
@@ -98,11 +106,33 @@ class Main extends Component {
     this._getGrade()
   }
 
+  // 下拉刷新
+  onPullDownRefresh(){
+    this.setState({
+      pageIndex:1
+    },()=>{
+      this.setState({
+        questionArr:[]
+      })
+      this._getList().then((res)=>{
+        wx.stopPullDownRefresh()
+      })
+    })
+  }
+
   // onHide() {
   // }
 
   // onUnload() {
   // }
+
+  showBig = event=>{
+    console.log(event.target.id)
+    wx.previewImage({
+      urls: [event.target.id] // 需要预览的图片http链接列表
+    })
+
+  }
 
   _getList = ()=>{
     console.log(this.state.data.orderType)
@@ -110,51 +140,60 @@ class Main extends Component {
     const that = this
     let arr = []
     console.log(url)
-    const token = wx.getStorageSync('token').token
     that.state.more = false
     wx.showLoading({
       title:'加载中',
       mask:true
     })
-    wx.request({
-      url: url, 
-      data: {},
-      header: {
-          'content-type': 'application/json',
-          'token': token
-      },
-      success: function(res) {
-        console.log('success',res.data)
-      },
-      complete: function(r){
-        wx.hideLoading()
-        if(r.errMsg.indexOf('ok')>-1){
-          r.data.map((e)=>{
-            arr.push({
-              title:e.question.speak.title,
-              id:e.question.speak.id,
-              des:e.question.speak.content,
-              grade:e.grade,
-              subject:e.subject,
-              stop_time:(e.question.stop_time),
-              timer:+new Date(e.question.stop_time),
-              price:e.price,
-              image_url:e.question.speak.image,
-              voice_url:e.question.speak.voice_url,
+    return new Promise((resolve, reject)=>{
+      wx.request({
+        url: url, 
+        data: {},
+        header: {
+            'content-type': 'application/json'
+        },
+        fail: function() {
+          reject()
+        },
+        success: function(res) {
+          console.log('success',res.data)
+        },
+        complete: function(r){
+          resolve()
+          wx.hideLoading()
+          if(r.errMsg.indexOf('ok')>-1){
+            r.data.map((e)=>{
+              arr.push({
+                tid:e.id,//topic id ,每个topic 包含问题 和 答案
+                question_id:e.question_id,//问题的id
+                answer_user_id:e.answer_user_id, //回答人id
+                status:e.status,//问题状态 0:待回答 1:被抢答 2:已回答待确认 3:已回答需修改 4:已回答要退单 5:
+                title:e.question.speak.title,
+                id:e.id,
+                des:e.question.speak.content,
+                grade:e.grade,
+                subject:e.subject,
+                stop_time:(e.question.stop_time),
+                timer:+new Date(e.question.stop_time),
+                price:e.price,
+                image_url:e.question.speak.image,
+                // voice_url:e.question.speak.voice_url,
+                user:e.question.speak.user,
+              })
             })
-          })
-          if(arr.length<10){
-            that.state.more = false
-          }else{
-            that.state.more = true
+            if(arr.length<10){
+              that.state.more = false
+            }else{
+              that.state.more = true
+            }
+            arr = that.state.questionArr.concat(arr)
+            that.setState({
+              questionArr:arr
+            })
           }
-          arr = that.state.questionArr.concat(arr)
-          that.setState({
-            questionArr:arr
-          })
+          console.log('complete',r)
         }
-        console.log('complete',r)
-      }
+      })
     })
   }
   _getGrade = ()=>{
@@ -188,6 +227,9 @@ class Main extends Component {
     console.log(this.state.data)
     // this.state.questionArr = []
     this.setState({
+      pageIndex:1
+    })
+    this.setState({
       questionArr:[]
     })
     this._getList()
@@ -214,20 +256,21 @@ class Main extends Component {
   _onClickCell = event=>{
     console.log(event)
     console.log(event.currentTarget.id)
-    const qid = event.currentTarget.id
+    const tid = event.currentTarget.id
     let que = {}
     this.state.questionArr.map((q)=>{
-        if(q.id==qid){
+        if(q.tid==tid){
           que = q
         }
     })
-    wx.setStorageSync('question',JSON.stringify(que))
+    wx.setStorageSync('question',(que))
+    
 
     
     console.log(que)
     // return
      wx.navigateTo({
-        url: `/pages/answerOrder/answerOrder?answerId=${qid}&communityId=${2}&contact=${1}&title=${'hahah'}`,
+        url: `/pages/answerOrder/answerOrder?topicId=${tid}&tid=${2}&contact=${1}&title=${'hahah'}`,
         complete:function(e){
             // console.log(e)
         }
@@ -254,8 +297,9 @@ class Main extends Component {
     // console.log(event.detail.value)
     const data = this.copyObject(this.state.data);
     data.grade = Number(event.detail.value)
-    // data.gradeno = ''
-    this.stateChange(data)
+    this.stateChange(data).then(()=>{
+      this.searchQuestion()
+    })
     // this.setSelectStorage({
     //   grade:(data.gradename-1)*data.gradename*3+data.gradeno,
     //   gradename:data.gradename+1,
@@ -273,7 +317,9 @@ class Main extends Component {
     const data = this.copyObject(this.state.data);
     data.subject = Number(event.detail.value)
     
-    this.stateChange(data)
+    this.stateChange(data).then(()=>{
+      this.searchQuestion()
+    })
     // this.setSelectStorage({
     //   gradename:data.gradename+1,
     //   gradeno:data.gradeno+1,
@@ -284,26 +330,21 @@ class Main extends Component {
   orderTypeChange = event=>{
     const data = this.copyObject(this.state.data);
     data.orderType = Number(event.detail.value)
-    this.stateChange(data)
+    this.stateChange(data).then(()=>{
+      this.searchQuestion()
+    })
   }
 
   stateChange = (data)=>{
-    console.log(data)
-    console.log(this.setState)
-    console.log('------------------------')
-    console.log(this.state.data)
-    this.setState({
-      data: data
-    },()=>{
-      this.setState({
+    const that = this
+    return new Promise((resolve, reject)=>{
+      that.setState({
         data: data
       },()=>{
-        console.log('+++++++++++++++++')
-        console.log(this.state.data)
+        resolve()
       })
-      console.log('------------------------')
-      console.log(this.state.data)
     })
+    
     
   }
 

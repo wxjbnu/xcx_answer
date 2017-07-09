@@ -167,7 +167,7 @@ class Main extends Component {
                 answer_user_id:e.answer_user_id, //回答人id
                 status:e.status,//问题状态 0:待回答 1:被抢答 2:已回答待确认 3:已回答需修改 4:已回答要退单 5:
                 title:e.question.speak.title,
-                id:e.question.speak.id,
+                id:e.id,
                 des:e.question.speak.content,
                 grade:e.grade,
                 subject:e.subject,
@@ -175,7 +175,8 @@ class Main extends Component {
                 timer:+new Date(e.question.stop_time),
                 price:e.price,
                 image_url:e.question.speak.image,
-                voice_url:e.question.speak.voice_url,
+                // voice_url:e.question.speak.voice_url,
+                user:e.question.speak.user,
               })
             })
             if(arr.length<10){
@@ -253,10 +254,10 @@ class Main extends Component {
   _onClickCell = event=>{
     console.log(event)
     console.log(event.currentTarget.id)
-    const qid = event.currentTarget.id
+    const tid = event.currentTarget.id
     let que = {}
     this.state.questionArr.map((q)=>{
-        if(q.id==qid){
+        if(q.tid==tid){
           que = q
         }
     })
@@ -267,7 +268,7 @@ class Main extends Component {
     console.log(que)
     // return
      wx.navigateTo({
-        url: `/pages/answerOrder/answerOrder?answerId=${qid}&tid=${2}&contact=${1}&title=${'hahah'}`,
+        url: `/pages/answerOrder/answerOrder?topicId=${tid}&tid=${2}&contact=${1}&title=${'hahah'}`,
         complete:function(e){
             // console.log(e)
         }

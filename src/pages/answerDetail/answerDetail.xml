@@ -5,8 +5,8 @@
         <!-- 个人信息 -->
         <view class="user-info" style="padding:0 5%;">
             <view class="flex-row user-header">
-                <image class="header-avatar" src="{{state.question.userinfo.poster}}" background-size="cover"></image>
-                <text>微信昵称</text>
+                <image class="header-avatar" src="{{state.question.user.avatar_url}}" background-size="cover"></image>
+                <text>{{state.question.user.nickname}}</text>
             </view>
             <text>{{props.gradeArr[state.question.grade]}}{{props.subjectArr[state.question.subject]}}</text>
         </view>

@@ -5,7 +5,7 @@
         <view class="tips_content">{{state.tips}}</view>
     </view>-->
 
-    <view style="background:#fff;height:{{state.searchBarHeight}}rpx">
+    <view style="background:#fff;">
     <!-- 选择年级、学科、select-info-row bindtap="selectGrade"-->
         <view class="select-grade row" style="">
             <!--<text class="select-grade-tt" style="">科目</text>
@@ -53,14 +53,7 @@
                 <text style="height:90rpx;line-height:90rpx;text-align:center;justify-content:center;" class="date-input">{{props.orderType[state.data.orderType]}}</text>
             </picker>
         </view>
-        <!-- 确认按钮 -->
-        <view style="margin:20rpx 30%;">
-            <button type="primary" size="default"
-                bindtap="searchQuestion" hover-class="none">搜索</button>
-            <!--<view class="my-btn" style="width:280rpx;" bindtap="answerQuestion">
-                提问
-            </view>-->
-        </view>
+        
     </view>
 
     <!-- 问题列表 -->

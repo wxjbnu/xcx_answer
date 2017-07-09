@@ -96,11 +96,11 @@ class AnswerDetail extends Component {
 
   onLoad = param => {
       console.log(param)
-      this.state.questionId = param.answerId
+      this.state.questionId = param.topicId
       this.state.question = (wx.getStorageSync('question'))
       console.log(this.state.question)
       this.setState({
-        questionId:param.answerId
+        questionId:param.topicId
       })
   }
 
@@ -227,7 +227,7 @@ class AnswerDetail extends Component {
     answerQuestion = event =>{
         const url = `${wx.host}zerg/public/api/v1/createanswer`;
         const data = {
-            topic_id:this.state.question.tid,
+            topicId:this.state.question.tid,
             title:'11',
             content:this.state.content,
             imageurl:this.state.imgArr.join(),
@@ -254,7 +254,7 @@ class AnswerDetail extends Component {
                         duration: 500,
                         complete: function(res){
                             wx.navigateTo({
-                                url: `../../pages/answerInfo/answerInfo?answerId=${data.topic_id}&title=${'hahah'}`
+                                url: `../../pages/answerInfo/answerInfo?topicId=${data.topicId}&title=${'hahah'}`
                             });
                         }
                     });

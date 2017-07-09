@@ -5,7 +5,7 @@
         <view class="tips_content">{{state.tips}}</view>
     </view>-->
 
-    <view style="background:#fff;height:{{state.searchBarHeight}}rpx">
+    <view style="background:#fff;">
     <!-- 选择年级、学科、select-info-row bindtap="selectGrade"-->
         <view class="select-grade row" style="">
             <!--<text class="select-grade-tt" style="">科目</text>
