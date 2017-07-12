@@ -30,7 +30,8 @@ export default class answer extends Component {
             },
             grade:0, 
             subject:0,
-            stoptime: '2017-01-08', 
+            starttime: '',
+            stoptime: '', 
             title:'',//标题
             content:'',//文本内容
             imgArr:[],//上传用的图片数组
@@ -49,6 +50,10 @@ export default class answer extends Component {
         this.props.subject = config.subjectArr
         console.log(wx.config)
         wx.setNavigationBarTitle('提问');
+
+        const date = new Date();
+        this.state.starttime = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()
+        this.state.stoptime = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()
     };
 
     onReady = () => {

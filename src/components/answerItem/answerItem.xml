@@ -3,28 +3,33 @@
     hover="true"
     hover-class="cell_hover"
     id="{{props.answerModel.id}}"
-    class=""
+    class="cell-item"
 >
-    <view class="row align_center cell_box">
-        <view wx:if="{{props.answerModel.image_url[0].url}}" class="cell_image_wrap">
-            <image class="cell_image" mode="aspectFill" src="{{props.host+props.answerModel.image_url[0].url}}"/>
-        </view>
-
+    <view class="row align_center cell-box">
+        <!-- <view wx:if="{{props.answerModel.image_url[0].url}}" class="cell_image_wrap">
+             <image class="cell_image" mode="aspectFill" src="{{props.host+props.answerModel.image_url[0].url}}"/> 
+        </view> -->
         <view class="cell_body">
             <view class="cell-tt">{{props.answerModel.title}}</view>
             <view class="cell-des">
                 {{props.answerModel.des}}
             </view>
         </view>
-
         <view style="align-items:center;color:#1AAD19;">
             <text wx:if="{{props.isAnswer}}">¥{{props.answerModel.price}}元</text>
             <image class="cell_icon" src="../../images/icon_into_gray.png"/>
         </view>
     </view>
 
+    <!-- 图片列表  -->
+    <view wx:if="{{props.answerModel.image_url[0].url}}">
+        <component key="picList" />
+    </view>
+
+    <!--  学科，倒计时  -->
     <view class="cell_footer">
         <text>{{state.grade}}{{state.subject}}</text>
+        <text>{{state.status}}</text>
         <view>
             <block wx:if="{{props.isAnswer}}">
                 <component key="countdown"/>

@@ -31,7 +31,9 @@ export default class questionInfo extends Component {
             tid:null,//topic id 用来获取问题答案
             questionInfo:{},//问题内容
             answers:[],//回答内容
-
+            hosturl:wx.imgurl,
+            content:'',
+            imgArr:[],//上传用的
             srcArr:[],//图片数组
             voiceArr:[],//录音数组
         });
@@ -48,15 +50,7 @@ export default class questionInfo extends Component {
         //     questionId:param.answerId
         // })
         wx.setNavigationBarTitle('提问');
-        this._getAnswer().then((res)=>{
-            console.log(res)
-            if(res.errMsg.indexOf('ok')>-1){
-                console.log(res)
-                this.setState({
-                    answers:res.data.answers
-                })
-            }
-        })
+        this._initData()
     }
     
     onReady = () => {
@@ -94,27 +88,108 @@ export default class questionInfo extends Component {
                     voiceArr: voiceArr,
                 }
             },
-            alertView: {
-                component: AlertView,
+            answerPicList:{
+                component: picList,
                 props: {
-                    title: '温馨提示',
-                    content: `如需预订场地请致电管理处电话：${this.contact}，或者到应用市场下载《自在社区》APP在线预订。`,
-                    confirmText: '拨打',
-                    onConfirmTap: this._makeCall
+                    local:true,
+                    srcArr: this.state.srcArr,
                 }
-            }
+            },
+            answerVoiceList:{
+                component: voiceList,
+                props: {
+                    voiceArr: this.state.voiceArr,
+                }
+            },
+            // alertView: {
+            //     component: AlertView,
+            //     props: {
+            //         title: '温馨提示',
+            //         content: `如需预订场地请致电管理处电话：${this.contact}，或者到应用市场下载《自在社区》APP在线预订。`,
+            //         confirmText: '拨打',
+            //         onConfirmTap: this._makeCall
+            //     }
+            // }
         };
     }
+    _initData = ()=>{
+        this._getAnswer().then((res)=>{
+            console.log(res)
+            if(res.errMsg.indexOf('ok')>-1){
+                console.log(res)
+                this.setState({
+                    answers:res.data.answers
+                })
+            }
+        })
+    }
+    // 回答问题文字
+    setCont = event =>{
+        console.log(event.detail.value)
+        const content = event.detail.value
+        this.state.content = content
+        this.setState({
+            content:content
+        })
+    }
 
+    // 上传图片
+    uploadimg = event =>{
+        const that = this;
+        wx.chooseImage({
+            count: 1, // 默认9
+            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+            success: function (res) {
+                // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+                console.log(res);
+                var tempFilePaths = res.tempFilePaths
+                that.setState({
+                    src:tempFilePaths
+                })
+            },
+            fail:function(err){
+                console.log(err)
+            },
+            complete:function(e){
+                var tempFilePaths = e.tempFilePaths
+                // that.state.srcArr.push(tempFilePaths)
+                console.log(tempFilePaths)
+                if(tempFilePaths){
+                    // 获取文件路径
+                    var filePath = tempFilePaths[0];
+                    // 获取文件名
+                    var fileName = filePath.match(/(wxfile:\/\/)(.+)/)
+                    fileName = fileName[2]
+                    // 文件上传cos
+                    upload(filePath, fileName).then((e)=>{
+                        console.log('answer',e)
+                        if(e){
+                            that.setState({
+                                srcArr:[...that.state.srcArr, filePath]
+                            })
+                            that.setState({
+                                imgArr:[...that.state.imgArr, e]
+                            })
+                        }
+                    },(err)=>{
+                        console.log('err',err)
+                    })
+                }
+                console.log(e,that.state.srcArr)
+            }
+
+        })
+    }
 
     // 预览图片
     preimg = event =>{
         const that = this;
-        console.log(event.currentTarget.dataset.id)
+        console.log(event.target.id)
         // console.log(that.state.srcArr[0]);return;
         wx.previewImage({
             // current: '', // 当前显示图片的http链接
-            urls: that.state.srcArr[event.currentTarget.dataset.id] // 需要预览的图片http链接列表
+            urls: [event.target.id]// 需要预览的图片http链接列表
         })
     }
 
@@ -154,61 +229,25 @@ export default class questionInfo extends Component {
     }
     
     // 提交问题
-    answerQuestion = event=>{
-        console.log(this.state)
-        const condition = {
-            userid:1,
-            grade:this.state.grade,
-            subject:this.state.subject,
-        }
-        const url = `${wx.host}zerg/public/api/v1/createtopic/1`;
+    answerQuestion = event =>{
+        const url = `${wx.host}zerg/public/api/v1/createanswer`;
         const data = {
-            price:this.state.price,
-            stoptime:this.state.stoptime,
-            title:this.state.title,
+            topic_id:this.state.questionInfo.tid,
+            title:this.state.questionInfo.title,
             content:this.state.content,
             imageurl:this.state.imgArr.join(),
+            userid:22,
         }
         const token = wx.getStorageSync('token').token
         const that = this
         console.log(data)
-        console.log(condition)
-        console.log(Object.assign(data,condition))
-        if(this.state.grade==0){
-            wx.showToast({
-                title:'请选择年级',
-                duration:500,
-            })
-            return
-        }
-        if(this.state.subject==0){
-            wx.showToast({
-                title:'请选择学科',
-                duration:500,
-            })
-            return
-        }
-        if(!this.state.title){
-            wx.showToast({
-                title:'请输入问题名称',
-                duration:500,
-            })
-            return
-        }
-        if(this.state.price==0){
-            wx.showToast({
-                title:'悬赏价格不能为0',
-                duration:500,
-            })
-            return
-        }
         wx.request({
-            url: url, //
-            data: Object.assign(data,condition),
+            url: url, //仅为示例，并非真实的接口地址
+            data: data,
             method:'POST',
             header: {
                 'content-type': 'application/json',
-                'token' : token
+                'token': token,
             },
             success: function(res) {
                 console.log('success',res.data)
@@ -216,12 +255,16 @@ export default class questionInfo extends Component {
             complete: function(r){
                 if(r.errMsg.indexOf('ok')>-1){
                     wx.showToast({
-                        title:'提问成功，马上去到问题列表',
-                        duration:1500,
-                        complete:function(){
-                            wx.switchTab({url: '/pages/main/main'})
+                        title: '回答成功',
+                        icon: 'loading',
+                        duration: 500,
+                        complete: function(res){
+                            that._initData()
+                            // wx.navigateTo({
+                            //     url: `../../pages/answerInfo/answerInfo?topicId=${data.topicId}&title=${'hahah'}`
+                            // });
                         }
-                    })
+                    });
                 }
                 console.log('complete',r)
             }

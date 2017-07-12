@@ -93,7 +93,9 @@ class AnswerDetail extends Component {
          
     };
   }
-
+  onPullDownRefresh = ()=>{
+    wx.stopPullDownRefresh()
+  }
   onLoad = param => {
       console.log(param)
       this.state.questionId = param.topicId
@@ -224,10 +226,11 @@ class AnswerDetail extends Component {
         })
     }
 
+// 提交答案
     answerQuestion = event =>{
         const url = `${wx.host}zerg/public/api/v1/createanswer`;
         const data = {
-            topicId:this.state.question.tid,
+            topic_id:this.state.question.tid,
             title:'11',
             content:this.state.content,
             imageurl:this.state.imgArr.join(),

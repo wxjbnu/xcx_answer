@@ -1,37 +1,10 @@
 <view class="container">
     <view>
         <!-- 个人信息 -->
-        <view class="user-info" style="padding:0 5%;margin-top:30rpx;">
-            <view class="flex-row user-header">
-                <image class="header-avatar" src="{{state.userinfo.avatarUrl}}" background-size="cover"></image>
-                <text>{{state.userinfo.nickName}}</text>
-            </view>
-            <text>{{props.grade[state.questionInfo.grade]}}{{props.subject[state.questionInfo.subject]}}</text>
-        </view>
-        <!-- 问题详情 -->
-        <view style="padding:0 50rpx;">
-            <view class="">
-                <text class="">题目：{{state.questionInfo.title}}</text>
-            </view>
-            <view class="">
-                <text class="">描述：{{state.questionInfo.des}}</text>
-            </view>
-
-            <!--　图片上传列表　-->
-            <component key="picList" />
-            <!--　音频上传列表　-->
-            <component key="voiceList" />
-
-            <view class="">
-                <text class="">截止日期：{{state.questionInfo.stop_time}}</text>
-            </view>
-            <view class="">
-                <text class="">价格：{{state.questionInfo.price}}</text>
-            </view>
-        </view>
+        
 
         <!-- 答案 -->
-        <view style="padding:0 50rpx;border-top:1rpx solid">
+        <!--<view style="padding:0 50rpx;border-top:1rpx solid">
             <view class="img-row"
                 wx:if="{{state.answers.length>0}}"
                 wx:for="{{state.answers}}"
@@ -44,8 +17,107 @@
             </view>
 
             <view wx:if="state.answers.length==0">还没人作答</view>
+        </view>-->
+    </view>
+
+    <!-- 问题信息 -->
+    <view style="background:#fff;padding-top:20rpx;">
+        <!-- 个人信息 -->
+        <view class="user-info" style="padding:0 5%;">
+            <view class="flex-row user-header">
+                <image class="header-avatar" src="{{state.userinfo.avatarUrl}}" background-size="cover"></image>
+                <text>{{state.userinfo.nickName}}</text>
+            </view>
+            <text>{{props.grade[state.questionInfo.grade]}}{{props.subject[state.questionInfo.subject]}}</text>
         </view>
         
+        <!-- 问题描述 -->
+        <view>
+            <view class="answer-des-tt">{{state.questionInfo.title}}</view>
+            <!-- 题目描述 -->
+            <view class="answer-des-detail">{{state.questionInfo.des}}</view>
+
+            <!--　图片上传列表　-->
+            <component key="picList" />
+            <!--　音频上传列表　-->
+            <component key="voiceList" />
+
+        </view>
+
+        <view style="padding:0 5%;">
+            <view class="">
+                <text class="">截止日期：{{state.questionInfo.stop_time}}</text>
+            </view>
+            <view class="">
+                <text class="">价格：{{state.questionInfo.price}}</text>
+            </view>
+        </view>
+
+    </view>
+
+    <!-- 答题信息 -->
+    <view style="background:#fff;margin-top:30rpx;">
+
+        <!-- 如果已经回答 -->
+        <view class=""
+            style="padding:0 5%;"
+            wx:if="{{state.answers.length>0}}"
+            wx:for="{{state.answers}}"
+            wx:for-index="index"
+            wx:key="{{index}}"
+            wx:for-item="answer"
+        >
+            <view>作答时间：{{answer.answer_time}}</view>
+            <view>作答内容：{{answer.speak.content}}</view>
+
+            <view class="img-wrap">
+                <view class="img-row"
+                    wx:if="{{answer.speak.image.length>0}}"
+                    wx:for="{{answer.speak.image}}"
+                    wx:for-index="i"
+                    wx:key="{{i}}"
+                    wx:for-item="src"
+                >   
+                    <image bindtap="preimg"
+                        id="{{state.hosturl+src.url}}"
+                        style="width:100%;height:100%;background-color: #eeeeee;"
+                        mode="aspectFill" src="{{state.hosturl+src.url}}"></image>
+                </view>
+            </view>
+        </view>
+
+        <!-- 如果还没有回答 -->
+        <view wx:if="{{state.answers.length==0}}">
+            <!-- 回答 -->
+            <view class="form-row">
+                <textarea bindinput="setCont" class="question-des" auto-height="true" placeholder="" />
+            </view>
+            <!--　图片上传列表　-->
+            <component key="answerPicList" name="picList" />
+            <!--　音频上传列表　-->
+            <component key="answerVoiceList" name="voiceList"/>
+            <view class="form-row">
+                <view class="flex-row">
+                    <text bindtap="uploadimg">图片</text>
+                    <!--<text>文字</text>-->
+                    <!--<text
+                        bindtouchstart="startrecordvioce"
+                        bindtouchend="stoprecordvioce"
+                    >语音</text>-->
+                </view>
+            </view>
+            <view class="my-btn-area" style="margin:20rpx;border-top:1rpx solid #333;">
+                <view style="margin:10rpx;display:flex;flex-direction: row;justify-content: center;">
+                    <button type="primary" size="default" style="flex:0 0 33%"
+                        bindtap="answerQuestion" hover-class="none">提交</button>
+                        <!--<button type="primary" size="default" style="flex:0 0 33%"
+                        bindtap="answerQuestion" hover-class="none">提交</button>
+                        <button type="primary" size="default" style="flex:0 0 33%"
+                        bindtap="answerQuestion" hover-class="none">提交</button>-->
+                </view>
+            </view>
+        </view>
         
+
     </view>
 </view>

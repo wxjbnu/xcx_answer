@@ -66,7 +66,9 @@ class Main extends Component {
           // })
       };
   }
-
+  onPullDownRefresh = ()=>{
+    wx.stopPullDownRefresh()
+  }
   onLoad = param => {
       console.log(param)
       this.state.topicId = param.topicId

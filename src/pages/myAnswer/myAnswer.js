@@ -140,7 +140,7 @@ class myAnswer extends Component {
               answer_user_id:e.answer_user_id, //回答人id
               status:e.status,//问题状态 0:待回答 1:被抢答 2:已回答待确认 3:已回答需修改 4:已回答要退单 5:
               title:e.question.speak.title,
-              id:e.question.speak.id,
+              id:e.id,
               des:e.question.speak.content,
               grade:e.grade,
               subject:e.subject,
@@ -222,11 +222,11 @@ class myAnswer extends Component {
   _onClickCell = event=>{
     console.log(event)
     console.log(event.currentTarget.id)
-    const qid = event.currentTarget.id
+    const tid = event.currentTarget.id
     let que = {}
-    this.state.questionArr.map((q)=>{
-        if(q.id==qid){
-          que = q
+    this.state.questionArr.map((t)=>{
+        if(t.id==tid){
+          que = t
         }
     })
     wx.setStorageSync('question',(que))
@@ -235,7 +235,7 @@ class myAnswer extends Component {
     console.log(que)
     // return
      wx.navigateTo({
-        url: `/pages/answerInfo/answerInfo?answerId=${qid}&communityId=${2}&contact=${1}&title=${'hahah'}`,
+        url: `/pages/answerInfo/answerInfo?topicId=${tid}&communityId=${2}&contact=${1}&title=${'hahah'}`,
         complete:function(e){
             // console.log(e)
         }

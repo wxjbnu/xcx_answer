@@ -28,8 +28,8 @@ class Main extends Component {
     this.state = {
         pageIndex:1,
         more:true,
-        searchBarHeight:'300',
-        pageHeight:wx.HEIGHT-300,
+        searchBarHeight:'150',
+        pageHeight:wx.HEIGHT-150,
         questionArr: [],
         data:{
           // gradename: null,

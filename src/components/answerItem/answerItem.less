@@ -1,17 +1,31 @@
-
+@import "../../app";
+@import "../../components/picList/picList";
 .list-item {
   display: block;
   margin-bottom: 10rpx;
 }
+.cell-item{
+  background-color: #fff;
+  border-bottom: 1rpx solid @sepSpace;
+}
 .cell_box {
   height: 188rpx;
-  padding: 0 20rpx;
+  padding: 20rpx 20rpx 0 20rpx;
   border-top: 1rpx solid @sepSpace;
-  border-bottom: 1rpx solid @sepSpace;
   color: #333;
   font-size: 28rpx;
   justify-content: space-between;
-  background-color: #fff;
+  // background-color: #fff;
+}
+
+.cell-box {
+  // height: 188rpx;
+  padding: 0 20rpx;
+  border-top: 1rpx solid @sepSpace;
+  color: #333;
+  font-size: 28rpx;
+  justify-content: space-between;
+  // background-color: #fff;
 }
 .cell_image_wrap{
   flex: 0 0 33.3333%;
@@ -41,7 +55,7 @@
   padding:20rpx;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #fff;
+  // background-color: #fff;
 }
 
 .cell_hover {

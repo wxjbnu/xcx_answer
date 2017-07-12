@@ -19,3 +19,16 @@ export const subjectArr = [
 export const orderType = [
     '默认排序','时间新到旧','价格高到低'
 ]
+
+export const questionStatus = [
+    '待回答',
+    '被抢答',
+    '回答完成待确认',
+    '需修改',
+    '要退单',
+    '待修改',
+    '修改待确认',
+    '申诉',
+    '完成支付',
+    '过期无人回答',
+]
