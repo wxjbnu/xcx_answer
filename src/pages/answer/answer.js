@@ -37,7 +37,7 @@ export default class answer extends Component {
             imgArr:[],//上传用的图片数组
             srcArr:[],//图片数组
             voiceArr:[],//录音数组
-            price: 1,
+            price: 0.01,
         });
     }
     
@@ -268,7 +268,62 @@ export default class answer extends Component {
         })
         console.log(event.detail.value)
     }
-    
+
+    // 付款
+    payMoneny = (obj)=>{
+        console.log(obj.timeStamp)
+        wx.requestPayment({
+            'timeStamp': obj.timeStamp,
+            'nonceStr': obj.nonceStr,
+            'package': obj.package,
+            'signType': obj.signType,
+            'paySign': obj.paySign,
+            'success':function(res){
+            },
+            'fail' : function(res){
+            },
+            'complete' : function (){
+                wx.showToast({
+                    title:'提问成功，马上去到问题列表',
+                    duration:1500,
+                    complete:function(){
+                        wx.switchTab({url: '/pages/main/main'})
+                    }
+                })
+            }
+         })
+        
+    }
+
+    // 获取订单
+    getOrder = (id)=>{
+        const url = `${wx.host}zerg/public/api/v1/pay/pre_order`;
+        const data = {
+            id : id,
+            price : this.state.price,
+        }
+        const token = wx.getStorageSync('token').token
+        const that = this;
+        wx.request({
+            url: url, //
+            data: data,
+            method:'POST',
+            header: {
+                'content-type': 'application/json',
+                'token' : token
+            },
+            success: function(res) {
+                console.log('success',res.data)
+            },
+            complete: function(r){
+                if(r.errMsg.indexOf('ok')>-1){
+                    that.payMoneny(r.data)
+                }
+                console.log('complete',r)
+            }
+        })
+    }
+
     // 提交问题
     answerQuestion = event=>{
         console.log(this.state)
@@ -287,9 +342,9 @@ export default class answer extends Component {
         }
         const token = wx.getStorageSync('token').token
         const that = this
-        console.log(data)
-        console.log(condition)
-        console.log(Object.assign(data,condition))
+        // console.log(data)
+        // console.log(condition)
+        // console.log(Object.assign(data,condition))
         if(this.state.grade==0){
             wx.showToast({
                 title:'请选择年级',
@@ -331,15 +386,11 @@ export default class answer extends Component {
             },
             complete: function(r){
                 if(r.errMsg.indexOf('ok')>-1){
-                    wx.showToast({
-                        title:'提问成功，马上去到问题列表',
-                        duration:1500,
-                        complete:function(){
-                            wx.switchTab({url: '/pages/main/main'})
-                        }
-                    })
+                    that.getOrder(r.data)
+                    
                 }
                 console.log('complete',r)
+                
             }
         })
     }
