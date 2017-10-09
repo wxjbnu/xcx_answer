@@ -143,7 +143,7 @@ class Main extends Component {
               grade:e.grade,
               subject:e.subject,
               stop_time:(e.question.stop_time),
-              timer:+new Date(e.question.stop_time),
+              timer: +new Date(String(e.question.stop_time).replace(/-/g,'/')),
               price:e.price,
               image_url:e.question.speak.image,
               voice_url:e.question.speak.voice_url,
