@@ -282,14 +282,18 @@ export default class answer extends Component {
             },
             'fail' : function(res){
             },
-            'complete' : function (){
-                wx.showToast({
-                    title:'提问成功，马上去到问题列表',
-                    duration:1500,
-                    complete:function(){
-                        wx.switchTab({url: '/pages/main/main'})
-                    }
-                })
+            'complete' : function (res){
+                console.log(res)
+                if(res.errMsg.indexOf('ok')>-1){
+                    wx.showToast({
+                        title:'提问成功，马上去到问题列表',
+                        duration:1500,
+                        complete:function(){
+                            wx.switchTab({url: '/pages/main/main'})
+                        }
+                    })
+                }
+                
             }
          })
         
