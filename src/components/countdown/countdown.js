@@ -13,6 +13,9 @@ export default class countdown extends Component {
 
     constructor(props) {
         super(props);
+        console.log('------------countdown start')
+        console.log(props.ltimer)
+        console.log('------------countdown end')
 
         this.state = {
             hour: '00',
@@ -21,7 +24,7 @@ export default class countdown extends Component {
         };
     }
     onReady(){
-        if(!config.debug){
+        if(!config.debug) {
             this.settime = setInterval(()=>{
                 this._changeTime(this._calculateTime())
             },1000)
@@ -29,14 +32,14 @@ export default class countdown extends Component {
     }
 
     // 计算剩余时间
-    _calculateTime(){
+    _calculateTime() {
         const that = this;
         let nowtime = new Date();
         nowtime = nowtime.getTime();
         
         let lasttime = 0;
         // console.log(this.props.ltimer,nowtime)
-        if(this.props.ltimer>nowtime){
+        if(this.props.ltimer > nowtime){
             lasttime = this.props.ltimer - nowtime;
         }else{
             clearInterval(that.settime)
@@ -48,10 +51,10 @@ export default class countdown extends Component {
         timer = parseInt(timer/1000);
         let hour = parseInt(timer/3600);
         let min = parseInt(timer/60)%60;
-        let sec = timer%60;
-        hour = hour>9?hour:'0'+hour;
-        min = min>9?min:'0'+min;
-        sec = sec>9?sec:'0'+sec;
+        let sec = timer % 60;
+        hour = hour > 9 ? hour : '0' + hour;
+        min = min > 9 ? min : '0' + min;
+        sec = sec > 9 ? sec : '0' + sec;
         this.setState({
             hour: String(hour),
             min: String(min),

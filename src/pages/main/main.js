@@ -44,6 +44,9 @@ class Main extends Component {
 
   children() {
     const items = this.state.questionArr || [];
+    console.log('-----------------------main children start')
+    console.log(items)
+    console.log('-----------------------main children end')
     return {
         // 倒计时组件
         listItems: items.map((item) => {
@@ -172,7 +175,7 @@ class Main extends Component {
                 grade:e.grade,
                 subject:e.subject,
                 stop_time:(e.question.stop_time),
-                timer:+new Date(e.question.stop_time),
+                timer: +new Date(String(e.question.stop_time).replace(/-/g,'/')),
                 price:e.price,
                 image_url:e.question.speak.image,
                 // voice_url:e.question.speak.voice_url,
@@ -257,7 +260,7 @@ class Main extends Component {
     const tid = event.currentTarget.id
     let que = {}
     this.state.questionArr.map((q)=>{
-        if(q.tid==tid){
+        if(q.tid == tid){
           que = q
         }
     })

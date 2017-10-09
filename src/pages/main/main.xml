@@ -60,9 +60,9 @@
         </view>-->
     </view>
 
-    <!-- 问题列表 -->
+    <!-- 问题列表 state.pageHeight-->
     <scroll-view
-        style="height:{{state.pageHeight}}rpx;"
+        style="height: 999rpx;"
         scroll-y="true"
         class="scroll_view"
         bindscrolltolower="loadMore"

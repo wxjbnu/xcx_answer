@@ -20,7 +20,9 @@ class answerItem extends Component {
 
     constructor(props) {
         super(props);
-
+        console.log('----------------------answerModel start')
+        console.log(props.answerModel)
+        console.log('----------------------answerModel end')
         // 将科目和年级转换为汉字
         this.state = {
             grade: config.gradeArr[props.answerModel.grade],
@@ -34,6 +36,7 @@ class answerItem extends Component {
     children() {
         // const items = this.state.questionList || [];
         const srcArr = this.props.answerModel.image_url || [];
+        const ltimer = String(this.props.answerModel.timer).replace(/-/g,'/')
         return {
             // 倒计时组件
             countdown:{
