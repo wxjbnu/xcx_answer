@@ -234,10 +234,54 @@ export default class questionInfo extends Component {
     formReset = event=>{
         
     }
-    // 支付
+    
     _onTap = event =>{
-
+        
     }
+    // 支付
+    onPay = envet => {
+        const tid = (wx.getStorageSync('question').tid)
+        const url = `${wx.host}zerg/public/api/v1/paytopic`
+        const data = {
+            topic_id: tid,
+        }
+        const token = wx.getStorageSync('token').token
+        // const that = this
+        wx.request({
+            url: url, //
+            data: data,
+            method:'POST',
+            header: {
+                'content-type': 'application/json',
+                'token' : token
+            },
+            success: function(res) {
+                console.log('success',res.data)
+            },
+            complete: function(r){
+                if(r.errMsg.indexOf('ok')>-1){
+                    wx.showToast({
+                        title:'支付成功',
+                        duration:1500,
+                        complete:function(){
+                            wx.switchTab({url: '/pages/myQuestion/myQuestion'})
+                        }
+                    })
+                }
+                console.log('complete',r)
+            }
+        })
+    }
+    // 重答
+    onReset = envet => {
+        
+    }
+    // 退单
+    onReturn = envet => {
+        
+    }
+
+    
     // _onClickDate = fullDate => {
     //     this._loadVenueDetail(fullDate);
     // };
