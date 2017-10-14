@@ -44,14 +44,15 @@
             </view>
 
             <view wx:if="{{state.answers.length==0}}">还没人作答</view>
-            <view class="flex-row" wx:if="{{state.answers.length>0}}">
-                <button style="margin: 0 30rpx" type="primary" size="default"
-                bindtap="onPay" hover-class="none">支付</button>
-                <button style="margin: 0 30rpx" type="primary" size="default"
-                bindtap="onReset" hover-class="none">重答</button>
-                <button style="margin: 0 30rpx" type="primary" size="default"
-                bindtap="onReturn" hover-class="none">退单</button>
-            </view>
+        </view>
+
+        <view style="padding:50rpx;border-top:1rpx solid" class="flex-row" wx:if="{{state.answers.length>0}}">
+            <button style="margin: 0 30rpx" type="primary" size="default"
+            bindtap="onPay" hover-class="none">支付</button>
+            <button style="margin: 0 30rpx" type="primary" size="default"
+            bindtap="onReset" hover-class="none">重答</button>
+            <button style="margin: 0 30rpx" type="primary" size="default"
+            bindtap="onReturn" hover-class="none">退单</button>
         </view>
         
         
