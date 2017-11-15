@@ -142,6 +142,7 @@ class Main extends Component {
     let arr = []
     console.log(url)
     that.state.more = false
+    const token = wx.getStorageSync('token').token
     wx.showLoading({
       title:'加载中',
       mask:true
@@ -151,7 +152,8 @@ class Main extends Component {
         url: url, 
         data: {},
         header: {
-            'content-type': 'application/json'
+            'content-type': 'application/json',
+            'token': token
         },
         fail: function() {
           reject()
